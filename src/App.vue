@@ -6,7 +6,7 @@ import { useReviewStore } from "./stores/review";
 import type { Viewer } from "./types";
 const store = useReviewStore();
 const { t } = useI18n();
-const choices = ["评委-林策", "评委-周筑", "主办方"].map((value) => ({ label: value, value }));
+const choices = ["评委-林策", "评委-周筑", "评委-替补", "主办方"].map((value) => ({ label: value, value }));
 </script>
 <template>
   <div class="shell">
