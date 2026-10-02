@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { NMessageProvider, NSelect } from "naive-ui";
@@ -6,7 +7,13 @@ import { useReviewStore } from "./stores/review";
 import type { Viewer } from "./types";
 const store = useReviewStore();
 const { t } = useI18n();
-const choices = ["评委-林策", "评委-周筑", "主办方"].map((value) => ({ label: value, value }));
+const choices = computed(() => [
+  ...store.roster.map((member) => ({
+    label: member.role === "exited" ? `${member.name}（已退出）` : member.role === "substitute" ? `${member.name}（替补）` : member.name,
+    value: member.name
+  })),
+  { label: "主办方", value: "主办方" }
+]);
 </script>
 <template>
   <div class="shell">
